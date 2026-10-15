@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=neutron-star
+Exec=neutron-star
+Icon=neutron-star
+Categories=Development;
+Terminal=false
+Keywords=wails
+Version=1.0
+StartupNotify=false
