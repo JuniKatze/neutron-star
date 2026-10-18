@@ -12,7 +12,9 @@ import type * as main$0 from "../../../../../neutron-star/models.js";
 declare module "@wailsio/runtime" {
     namespace Events {
         interface CustomEvents {
-            "ns:session-event": main$0.EventEnvelope;
+            "chat:delta": main$0.ChatDelta;
+            "chat:done": main$0.ChatOutcome;
+            "chat:error": main$0.ChatOutcome;
         }
     }
 }

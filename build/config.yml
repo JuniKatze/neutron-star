@@ -52,7 +52,9 @@ dev_mode:
       - "*.ts" # The frontend directory will be excluded entirely by the setting above.
     git_ignore: true
   executes:
-    - cmd: wails3 build DEV=true
+    # Wails beta.29 的 GTK4 后端把控件的局部坐标误当成屏幕坐标传给窗口管理器，
+    # 导致无边框窗口开始拖动时鼠标跳到固定位置。开发构建改用 GTK3 后端。
+    - cmd: wails3 build DEV=true EXTRA_TAGS=gtk3
       type: blocking
     - cmd: wails3 task common:dev:frontend
       type: background

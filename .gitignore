@@ -1,38 +1,51 @@
-# Go build and test artifacts
+# Go and Wails build artifacts
 /bin/
+/neutron-star
+/*.exe
 /.task/
 /wails_windows_*.syso
 *.test
 coverage*.out
 *.coverprofile
 
-# Frontend dependencies and output
+# Frontend dependencies and build output
+# Keep frontend/bindings tracked; Wails generates it, but the official
+# v3 template does not exclude it from version control.
 /frontend/node_modules/
 /frontend/dist/
+*.tsbuildinfo
 
 # Wails packaging artifacts
 /build/linux/appimage/build/
 /build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
 
-# Android generated files and local configuration
+# Android generated files and machine-local configuration
 /build/android/.gradle/
 /build/android/app/build/
 /build/android/app/src/main/jniLibs/
 /build/android/overlay.json
 /build/android/gen/
 /build/android/local.properties
-*.jks
-*.keystore
 
-# iOS generated, machine-specific files
+# iOS generated and machine-local files
 /build/ios/DerivedData/
 /build/ios/xcode/overlay.json
 /build/ios/xcode/gen/
+**/xcuserdata/
+*.xcuserstate
+
+# Signing credentials and provisioning files
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.mobileprovision
 
 # Local environment and secrets
 .env
 .env.*
 !.env.example
+!.env.*.example
 
 # Logs and temporary files
 *.log
@@ -44,7 +57,13 @@ coverage*.out
 .idea/
 .vscode/
 .DS_Store
+._*
 Thumbs.db
+Desktop.ini
 
-# Local agent workspace
+# Local agent workspaces
 .workbuddy/
+.kilo/
+.agents/
+.codex/
+.openbitfun/

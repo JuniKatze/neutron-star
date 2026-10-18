@@ -136,14 +136,6 @@ func (r *Response) Validate() error {
 		}
 
 		switch part.Kind {
-		case PartError, PartEmpty:
-			return fmt.Errorf(
-				"message.parts[%d].kind: "+
-					"%q is not valid model output",
-				index,
-				part.Kind,
-			)
-
 		case PartToolCall:
 			callCount++
 		}
@@ -288,8 +280,8 @@ type Usage struct {
 // u 为 nil 时返回 nil。本方法不修改 u，不推算或补填字段。
 //
 // 缓存明细不得超过已知输入，推理明细不得超过已知输出。
-// 总量不得小于已知输入或输出。输入、输出和总量均已报告时，
-// 总量必须等于输入与输出之和。
+// 总量只要求非负：不同供应商对 total 的口径不一致，本包不再要求
+// 它与输入加输出相等。
 //
 // Validate 不假定缓存读取与缓存写入明细互斥，
 // 因此不检查二者之和是否超过输入。
@@ -334,14 +326,6 @@ func (u *Usage) Validate() error {
 			"reasoningTokens", u.ReasoningTokens,
 			"outputTokens", u.OutputTokens,
 		},
-		{
-			"inputTokens", u.InputTokens,
-			"totalTokens", u.TotalTokens,
-		},
-		{
-			"outputTokens", u.OutputTokens,
-			"totalTokens", u.TotalTokens,
-		},
 	}
 
 	for _, subset := range subsets {
@@ -352,18 +336,6 @@ func (u *Usage) Validate() error {
 				"%s: must not exceed %s",
 				subset.name,
 				subset.totalName,
-			)
-		}
-	}
-
-	if u.InputTokens != nil &&
-		u.OutputTokens != nil &&
-		u.TotalTokens != nil {
-		// 前面的检查保证 total >= input >= 0。
-		// 用减法检查等式，避免 input + output 发生整数溢出。
-		if *u.OutputTokens != *u.TotalTokens-*u.InputTokens {
-			return errors.New(
-				"totalTokens: must equal inputTokens plus outputTokens",
 			)
 		}
 	}

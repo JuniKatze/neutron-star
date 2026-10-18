@@ -1,0 +1,46 @@
+/*
+ * Local font system.
+ *
+ * Components consume the semantic family tokens below instead of naming font
+ * files directly. Swapping any family is a one-file change.
+ */
+
+@font-face {
+    font-family: "Neutron Sans";
+    src: url("../assets/fonts/NeutronSans-Regular.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neutron Sans";
+    src: url("../assets/fonts/NeutronSans-Medium.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neutron Sans";
+    src: url("../assets/fonts/NeutronSans-SemiBold.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Neutron Mono";
+    src: url("../assets/fonts/MapleMono-CN-Regular.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+:root {
+    /* 黑体：应用框架、控件、标题与普通界面文案。 */
+    --font-sans: "Neutron Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+    /* 等宽：代码、配置、路径、快捷键和编辑器。 */
+    --font-mono: "Neutron Mono", "Cascadia Mono", "SFMono-Regular", monospace;
+}
