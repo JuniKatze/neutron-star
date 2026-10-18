@@ -7,28 +7,47 @@
 *.test
 coverage*.out
 *.coverprofile
+*.pprof
+cpu.out
+mem.out
+go.work
+go.work.sum
 
 # Frontend dependencies and build output
 # Keep frontend/bindings tracked; Wails generates it, but the official
 # v3 template does not exclude it from version control.
 /frontend/node_modules/
 /frontend/dist/
+/frontend/.vite/
+/frontend/.pnpm-store/
+/frontend/coverage/
+/frontend/.eslintcache
+/frontend/.stylelintcache
 *.tsbuildinfo
 
 # Wails packaging artifacts
 /build/linux/appimage/build/
-/build/windows/nsis/MicrosoftEdgeWebview2Setup.exe
+/build/windows/nsis/*.exe
+
+# Downloaded by the optional frontend:vendor:puppertino Taskfile task.
+# Application code must not depend on this generated CSS without also
+# making the task part of the normal build.
+/frontend/public/puppertino/
 
 # Android generated files and machine-local configuration
 /build/android/.gradle/
+/build/android/.kotlin/
 /build/android/app/build/
+/build/android/app/.cxx/
 /build/android/app/src/main/jniLibs/
 /build/android/overlay.json
 /build/android/gen/
 /build/android/local.properties
+**/*.iml
 
 # iOS generated and machine-local files
 /build/ios/DerivedData/
+/build/ios/.build/
 /build/ios/xcode/overlay.json
 /build/ios/xcode/gen/
 **/xcuserdata/
@@ -39,13 +58,24 @@ coverage*.out
 *.keystore
 *.p12
 *.pfx
+*.p8
 *.mobileprovision
 
 # Local environment and secrets
 .env
 .env.*
+.envrc
 !.env.example
 !.env.*.example
+/model.json
+model.local.json
+
+# Local runtime data
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
 
 # Logs and temporary files
 *.log
